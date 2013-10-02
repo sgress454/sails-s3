@@ -78,7 +78,6 @@ function BatchContext( incomingBatch, options, cb ) {
 		fileRecord.pathPrefix = options.pathPrefix;
 
 
-
 		// Create an options object for this particular file upload
 		var fileOptions = _.extend({}, options, {
 			path: path
@@ -89,6 +88,9 @@ function BatchContext( incomingBatch, options, cb ) {
 		var bucket = new S3Bucket(fileOptions);
 
 		// Pipe file's bytes into an outgoing MPU stream to S3
+		// TODO: figure out how to wait until all files are ready before triggering this callback
+		// TODO: also find out what sails-local-fs is doing right now
+		// TODO: make sure quota limits from uploadStream are actually blocking the continued upload of files to S3
 		bucket.upload(incomingFile, function mpuDone (err, file) {
 			if (err) {
 				// make sure `err instanceof Error`
@@ -99,6 +101,9 @@ function BatchContext( incomingBatch, options, cb ) {
 				// if (e.code === 'ENOENT' && e.path) {
 				// 	e.message = 'Could not write file to ' + e.path;
 				// }
+
+				// Pass down url to file record
+				fileRecord.url = file.url;
 
 				// Emit file error back up the incomingBatch stream
 				incomingBatch.emit('end', err);
