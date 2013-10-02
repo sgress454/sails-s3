@@ -69,15 +69,6 @@ function BatchContext( incomingBatch, options, cb ) {
 			return;
 		}
 
-		// Update incomingBatch's reference to this file
-		// with adapter-specific information
-		// Update incomingBatch to include blobName & pathPrefix
-		var fileRecord = incomingBatch.files[incomingFile._id];
-		fileRecord.path = path;
-		fileRecord.blobName = blobName;
-		fileRecord.pathPrefix = options.pathPrefix;
-
-
 		// Create an options object for this particular file upload
 		var fileOptions = _.extend({}, options, {
 			path: path
@@ -86,6 +77,16 @@ function BatchContext( incomingBatch, options, cb ) {
 		// Instantiate an S3Bucket
 		// (this builds the underlying knox client)
 		var bucket = new S3Bucket(fileOptions);
+
+		// Update incomingBatch's reference to this file
+		// with adapter-specific information
+		// Update incomingBatch to include blobName & pathPrefix & url
+		var fileRecord = incomingBatch.files[incomingFile._id];
+		fileRecord.path = path;
+		fileRecord.blobName = blobName;
+		fileRecord.pathPrefix = options.pathPrefix;
+		fileRecord.url = bucket.url;
+
 
 		// Pipe file's bytes into an outgoing MPU stream to S3
 		// TODO: figure out how to wait until all files are ready before triggering this callback
@@ -101,9 +102,6 @@ function BatchContext( incomingBatch, options, cb ) {
 				// if (e.code === 'ENOENT' && e.path) {
 				// 	e.message = 'Could not write file to ' + e.path;
 				// }
-
-				// Pass down url to file record
-				fileRecord.url = file.url;
 
 				// Emit file error back up the incomingBatch stream
 				incomingBatch.emit('end', err);

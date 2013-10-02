@@ -18,8 +18,10 @@ function S3Bucket (options) {
 		secret	: options.secret,
 		bucket	: options.bucket
 	});
-}
 
+	// Figure out URL ahead of time so its available
+	this.url = this.s3Client.url(this.path);
+}
 
 
 /**
@@ -33,7 +35,7 @@ function S3Bucket (options) {
 S3Bucket.prototype.upload = function (incomingStream, cb) {
 
 	// console.log('knox client :: ', this.s3Client);
-	// console.log('path :: ', this.path);
+	// console.log('url :: ', this.s3Client.url(this.path));
 	
 	// Create a multipart file upload
 	// (implicitly, this uploads each part as a different file to S3, then unifies them later)
