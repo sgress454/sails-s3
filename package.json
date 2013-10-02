@@ -1,6 +1,6 @@
 {
   "name": "sails-s3",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "s3 adapter for sails/waterline",
   "main": "index.js",
   "scripts": {
