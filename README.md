@@ -2,12 +2,17 @@
 
 # sails-s3
 
-> Tested with Sails 0.9.4
+> #### IMPORTANT NOTE
+> The blob adapter specification is still a work in progress, and may change dramatically.
+> This blob store integration itself, along with `file-parser` and `waterline-blob` are very much still alpha-ware.
+> The spec will harden, and barring any unforeseen circumstances, we should be able to officially release these adapters by the end of 2013.
 
 Streaming binary upload/download adapter for Amazon S3
 
 
-For example, see: https://github.com/mikermcneil/stream-debug
+
+
+If you'd still like to try it out, see the example here: https://github.com/mikermcneil/stream-debug
 
 ## About Sails.js
 http://sailsjs.com
