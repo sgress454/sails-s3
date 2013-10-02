@@ -1,0 +1,25 @@
+{
+  "name": "sails-s3",
+  "version": "0.0.0",
+  "description": "s3 adapter for sails/waterline",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/mikermcneil/sails-s3.git"
+  },
+  "keywords": [
+    "sails",
+    "s3",
+    "sailsjs",
+    "amazon",
+    "adapter",
+    "waterline"
+  ],
+  "author": "Mike McNeil",
+  "license": "MIT",
+  "gitHead": "d4162b2c96ec8a5d2ae702e218d47f1993ec244a",
+  "readmeFilename": "README.md"
+}
