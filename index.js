@@ -2,28 +2,17 @@
  * Module dependencies
  */
 
-var fs			= require('fs'),
-	Glob		= require('glob').Glob,
-	_			= require('lodash'),
+var _			= require('lodash'),
+	knox		= require('knox'),
 	BlobFactory	= require('waterline-blob');	// TODO: merge `waterline-blob` into waterline core
 
 
 /*---------------------------------------------------------------
-	:: Local Filesystem Adapter
-	:: sails-local-fs
+	:: S3 Adapter
+	:: sails-s3
 	::
-
-	Primarily, this adapter is useful for uploading user files 
-	to the local hard disk on the server.  Note that you'll be
-	limited to the space available on your filesystem!
-
-	Also, if you are scaling to multiple servers behind some
-	kind of load balancer, you'll need to share some kind of
-	file store, rather than using the local disk on each machine
-	(since a user might upload a file to one server, then try
-	to download it from another.) However, you can use any
-	accessible directory, including mounted network drives, etc.
-	which alleviates this limitation.
+	
+	Upload and download stuff from Amazon S3 with Waterline/Sails
 
 ---------------------------------------------------------------*/
 module.exports = (function () {
@@ -35,12 +24,24 @@ module.exports = (function () {
 
 	return BlobFactory({
 
+		registerCollection: function (collection, cb) {
+
+			console.log('-->',collection);
+			cb();
+			// var client = knox.createClient({
+			// 	key: '<api-key-here>',
+			// 	secret: '<secret-here>',
+			// 	bucket: 'learnboost'
+			// });
+		},
+
 
 		/**
 		 * Read from provided uploadStream and write to blob store
 		 */
 
 		write: function  ( uploadStream, options, cb ) {
+			return cb (new Error('Not supported yet!'));
 
 			// Grab a logger (use sails.log if available)
 			var log = typeof sails !== 'undefined' ? sails.log : {
@@ -141,6 +142,7 @@ module.exports = (function () {
 		 */
 
 		read: function ( downloadStream, options, cb ) {
+			return cb (new Error('Not supported yet!'));
 
 			// Grab a logger (use sails.log if available)
 			var log = typeof sails !== 'undefined' ? sails.log : {
