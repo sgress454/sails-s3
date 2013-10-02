@@ -10,11 +10,13 @@ Streaming binary upload/download adapter for Amazon S3
 > The spec will harden, and barring any unforeseen circumstances, we should be able to officially release these adapters by the end of 2013.
 >
 > If you'd still like to try it out, see the example here: https://github.com/mikermcneil/stream-debug
+> And you can learn more about the adapter interface spec here: https://github.com/balderdashy/sails-docs/blob/0.9/api.adapter-interface.md
 
 
 ## About Sails.js
 http://sailsjs.com
-ails.js make it easy to build custom, enterprise-grade Node.js apps. It is designed to mimic the MVC pattern of frameworks like Ruby on Rails, but with support for the requirements of modern apps: data-driven APIs with scalable, service-oriented architecture. It's especially good for building chat, realtime dashboards, or multiplayer games.
+
+Sails.js make it easy to build custom, enterprise-grade Node.js apps. It is designed to mimic the MVC pattern of frameworks like Ruby on Rails, but with support for the requirements of modern apps: data-driven APIs with scalable, service-oriented architecture. It's especially good for building chat, realtime dashboards, or multiplayer games.
 
 ## About Waterline
 http://github.com/balderdashy/waterline
