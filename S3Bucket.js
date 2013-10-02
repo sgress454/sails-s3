@@ -36,13 +36,21 @@ S3Bucket.prototype.upload = function (incomingStream, cb) {
 
 	// console.log('knox client :: ', this.s3Client);
 	// console.log('url :: ', this.s3Client.url(this.path));
+	// console.log(incomingStream);
 	
 	// Create a multipart file upload
 	// (implicitly, this uploads each part as a different file to S3, then unifies them later)
 	new S3MPU({
 		client: this.s3Client,
 		objectName: this.path,
-		stream: incomingStream
+		stream: incomingStream,
+		headers: {
+			// Pass mime down to S3
+			'Content-Type': incomingStream.mime,
+
+			// For now, make everything `public-read`
+			'x-amz-acl': 'public-read'
+		}
 	}, function multipartUploadComplete (err, body) {
 		if (err) return cb(err);
 		// 

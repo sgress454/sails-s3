@@ -54,7 +54,7 @@ function BatchContext( incomingBatch, options, cb ) {
 		// Determine blobName (using `saveAs`) and build path
 		var downloadName = incomingFile.filename,
 			blobName = options.saveAs(downloadName),
-			path = options.pathPrefix + blobName;
+			path = options.pathPrefix + '/' + blobName;
 		console.log('* ' + downloadName + ' :: Adapter received new file...');
 
 		// Ensure that pathPrefix + blobName doesn't exceed max path length
@@ -105,6 +105,7 @@ function BatchContext( incomingBatch, options, cb ) {
 
 				// Emit file error back up the incomingBatch stream
 				incomingBatch.emit('end', err);
+				console.error('Error uploading to S3!',err);
 				return;
 			}
 
